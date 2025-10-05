@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Honey Pot Hub — Deals & Codes</title>
+  <meta name="description" content="Curated affiliate deals and discount codes.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="container header">
+    <div class="brand">
+      <div class="logo">🍯</div>
+      <div>
+        <h1>Honey Pot Hub</h1>
+        <p class="muted">Find a deal. Support the creator.</p>
+      </div>
+    </div>
+    <nav>
+      <a href="#" data-cat="all" class="pill pill-active">All</a>
+      <a href="#" data-cat="tech" class="pill">Tech</a>
+      <a href="#" data-cat="outdoors" class="pill">Outdoors</a>
+      <a href="#" data-cat="fitness" class="pill">Fitness</a>
+      <a href="#" data-cat="home" class="pill">Home</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="controls">
+      <input id="search" type="search" placeholder="Search deals, brands, or codes…" aria-label="Search deals">
+      <div class="toggles">
+        <label class="toggle">
+          <input type="checkbox" id="show-codes" checked>
+          <span>Show codes</span>
+        </label>
+        <label class="toggle">
+          <input type="checkbox" id="only-featured">
+          <span>Featured only</span>
+        </label>
+      </div>
+    </section>
+
+    <section id="grid" class="grid" aria-live="polite"></section>
+    <p id="empty" class="empty hidden">No results. Try clearing filters or searching something else.</p>
+  </main>
+
+  <footer class="container footer">
+    <p class="muted">© <span id="year"></span> Honey Pot Hub. Some links are affiliate links—at no cost to you, we may earn a commission.</p>
+  </footer>
+
+  <!-- Optional: paste your analytics snippet (e.g., Vercel Analytics) here -->
+  <script defer src="script.js"></script>
+</body>
+</html>

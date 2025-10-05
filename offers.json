@@ -1,0 +1,44 @@
+[
+  {
+    "name": "Rakuten \u2014 $30 Bonus",
+    "description": "Sign up and get a $30 bonus after qualifying purchase. Stacks with store cash back.",
+    "url": "https://www.rakuten.com/",
+    "code": "",
+    "categories": [
+      "tech",
+      "home"
+    ],
+    "featured": true
+  },
+  {
+    "name": "REI \u2014 Member Coupon",
+    "description": "Up to 20% off one full-price item for members (seasonal).",
+    "url": "https://www.rei.com/",
+    "code": "MEMBER20",
+    "categories": [
+      "outdoors"
+    ],
+    "featured": false
+  },
+  {
+    "name": "Amazon \u2014 Limited Deals",
+    "description": "Lightning deals updated daily. Best for tech & home gadgets.",
+    "url": "https://www.amazon.com/",
+    "code": "",
+    "categories": [
+      "tech",
+      "home"
+    ],
+    "featured": true
+  },
+  {
+    "name": "Nike \u2014 Free Shipping",
+    "description": "Free shipping & returns for members, plus periodic promo codes.",
+    "url": "https://www.nike.com/",
+    "code": "SHIPIT",
+    "categories": [
+      "fitness"
+    ],
+    "featured": false
+  }
+]
