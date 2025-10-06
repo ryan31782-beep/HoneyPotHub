@@ -35,3 +35,11 @@ nav{display:flex;gap:8px;flex-wrap:wrap}
 .footer{padding:40px 16px}
 .empty{color:var(--muted);text-align:center;margin:40px 0}
 .hidden{display:none}
+.hero {display:grid;grid-template-columns:1.3fr .7fr;gap:24px;align-items:center;margin:12px 0 24px}
+.hero-left .store-buttons{display:flex;gap:12px;flex-wrap:wrap;margin:14px 0}
+.store-btn{display:inline-block;background:#1f2937;color:white;padding:10px 14px;border-radius:10px;text-decoration:none;border:1px solid var(--ring)}
+.store-btn:hover{transform:translateY(-1px)}
+.small{font-size:.9rem}
+.qr canvas,.qr img{border:1px solid var(--ring);border-radius:12px;background:var(--card);padding:8px}
+.mockup{font-size:80px;display:grid;place-items:center;background:var(--card);border:1px solid var(--ring);border-radius:24px;height:220px}
+@media(max-width:900px){.hero{grid-template-columns:1fr}.hero-right{order:-1}}
