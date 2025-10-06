@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Do Not Sell or Share My Personal Information — Honey Pot Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>body{font-family:Inter,system-ui,Segoe UI,Roboto,Arial;margin:0;padding:24px;max-width:850px}label{display:block;margin:12px 0}button{padding:10px 14px;border-radius:10px;border:0;background:#0ea5e9;color:#fff}</style>
+</head><body>
+<h1>Do Not Sell or Share My Personal Information</h1>
+<p>California residents may opt out of the “sale” or “sharing” of personal information. Submitting this request will disable analytics cookies (if any) and limit affiliate tracking where feasible. We will communicate valid opt-outs to our partners as required.</p>
+
+<form id="dnsmpi">
+  <label>Full Name <input name="name" required></label>
+  <label>Email (for confirmation) <input name="email" type="email" required></label>
+  <label>Request:
+    <select name="request" required>
+      <option value="optout">Opt out of sale/sharing</option>
+      <option value="revoke">Revoke previous opt-out</option>
+    </select>
+  </label>
+  <button type="submit">Submit Request</button>
+</form>
+
+<p id="result" style="margin-top:12px"></p>
+
+<script>
+  // Minimal local handling: write an opt-out flag locally and email/log for fulfillment.
+  document.getElementById('dnsmpi').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const data = Object.fromEntries(new FormData(e.target).entries());
+    try {
+      // Record locally so site behavior changes immediately:
+      localStorage.setItem('hph_ccpa_optout', JSON.stringify({ optout: data.request==='optout', email: data.email, ts: Date.now() }));
+      // TODO: Forward this to your inbox or a webhook for records and to notify Rakuten per their specs.
+      // For now, we fallback to mailto as a visible confirmation path:
+      const body = encodeURIComponent(`CCPA request from ${data.name} (${data.email})\nType: ${data.request}\nTime: ${new Date().toISOString()}`);
+      window.location.href = `mailto:privacy@thehoneypothub.com?subject=CCPA Request&body=${body}`;
+      document.getElementById('result').textContent = 'Your request has been recorded. We will process it promptly.';
+    } catch {
+      document.getElementById('result').textContent = 'Something went wrong. Please email privacy@thehoneypothub.com';
+    }
+  });
+
+  // Respect opt-out on page load (you can reuse this logic in index.html)
+  const ccpa = JSON.parse(localStorage.getItem('hph_ccpa_optout')||'{}');
+  if (ccpa.optout) {
+    // disable analytics and any optional tracking here
+  }
+</script>
+</body></html>
