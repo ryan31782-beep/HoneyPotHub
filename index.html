@@ -27,6 +27,33 @@
       <a href="#" data-cat="home" class="pill">Home</a>
     </nav>
   </header>
+  <section class="container hero">
+  <div class="hero-left">
+    <h2>Honey Pot Hub App</h2>
+    <p class="muted">Find working discount codes on the go. Scan in-store, copy codes, and let the community verify what works.</p>
+    <div class="store-buttons">
+      <!-- Replace these two URLs with your real store links when ready -->
+      <a class="store-btn" href="https://apps.apple.com/app/idYOUR_APPLE_ID" target="_blank" rel="noopener">Download on the App Store</a>
+      <a class="store-btn" href="https://play.google.com/store/apps/details?id=YOUR_ANDROID_PACKAGE" target="_blank" rel="noopener">Get it on Google Play</a>
+    </div>
+    <p class="muted small">Scan to download:</p>
+    <div id="app-qr" class="qr"></div>
+  </div>
+  <div class="hero-right">
+    <div class="mockup">📱</div>
+  </div>
+</section>
+
+<!-- QR generator (tiny, no build step) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
+<script>
+  // When the QR lib loads, generate a code that points to a single “smart” link.
+  // For now, use your site — later we can swap to a Branch/Bitly smart link.
+  window.addEventListener('load', function(){
+    var qrLink = 'https://thehoneypothub.com'; // TODO: replace with your universal/app store link
+    new QRCode(document.getElementById("app-qr"), { text: qrLink, width: 140, height: 140 });
+  });
+</script>
 
   <main class="container">
     <section class="controls">
