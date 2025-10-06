@@ -88,6 +88,84 @@
     }
   </style>
 </head>
+  <!-- Cookie / Consent Banner -->
+<div id="consent-banner" style="position:fixed;inset:auto 0 0 0;background:#0f172a;color:#fff;padding:14px;display:none;z-index:9999">
+  <div class="container" style="display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap">
+    <div>
+      We use cookies/links for analytics and affiliate tracking. 
+      See our <a href="/privacy.html" style="color:#93c5fd">Privacy Policy</a>. 
+      California residents: you can <a href="/do-not-sell.html" style="color:#93c5fd">opt out of sale/sharing</a>.
+    </div>
+    <div style="display:flex;gap:8px">
+      <button id="consent-manage" style="background:#fff;color:#111;padding:8px 12px;border-radius:10px;border:0">Manage</button>
+      <button id="consent-accept" style="background:#22c55e;color:#111;padding:8px 12px;border-radius:10px;border:0;font-weight:700">Accept</button>
+    </div>
+  </div>
+</div>
+
+<!-- Consent modal (very simple) -->
+<div id="consent-modal" style="position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;z-index:10000">
+  <div class="container" style="max-width:560px;margin:10vh auto;background:#fff;border-radius:12px;padding:16px">
+    <h3 style="margin:0 0 8px">Manage preferences</h3>
+    <label style="display:flex;align-items:center;gap:8px;margin:8px 0">
+      <input type="checkbox" id="pref-necessary" checked disabled>
+      Necessary (always on)
+    </label>
+    <label style="display:flex;align-items:center;gap:8px;margin:8px 0">
+      <input type="checkbox" id="pref-analytics">
+      Analytics
+    </label>
+    <label style="display:flex;align-items:center;gap:8px;margin:8px 0">
+      <input type="checkbox" id="pref-affiliate" checked>
+      Affiliate link tracking
+    </label>
+    <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:12px">
+      <button id="consent-save" style="background:#0ea5e9;color:#fff;padding:8px 12px;border-radius:10px;border:0">Save</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // simple consent storage
+  const consentKey = "hph_consent_v1";
+  const banner = document.getElementById('consent-banner');
+  const modal  = document.getElementById('consent-modal');
+
+  function getConsent() {
+    try { return JSON.parse(localStorage.getItem(consentKey)) || null; } catch { return null; }
+  }
+  function setConsent(obj) { localStorage.setItem(consentKey, JSON.stringify(obj)); }
+
+  function applyConsent(c) {
+    // Example: gate analytics by consent
+    if (c && c.analytics) {
+      // load GA/Vercel Analytics snippet here if you use it
+      // (paste your analytics script here when enabled)
+    }
+    // Affiliate link usage stays enabled (Qualifying Links) unless user opts out via CCPA page
+  }
+
+  (function initConsent(){
+    const c = getConsent();
+    if (!c) banner.style.display = 'block'; else applyConsent(c);
+    document.getElementById('consent-accept').onclick = () => {
+      const chosen = { necessary:true, analytics:true, affiliate:true, ts:Date.now() };
+      setConsent(chosen); banner.style.display='none'; applyConsent(chosen);
+    };
+    document.getElementById('consent-manage').onclick = () => { modal.style.display='block'; };
+    document.getElementById('consent-save').onclick = () => {
+      const chosen = {
+        necessary:true,
+        analytics: document.getElementById('pref-analytics').checked,
+        affiliate: document.getElementById('pref-affiliate').checked,
+        ts: Date.now()
+      };
+      setConsent(chosen); modal.style.display='none'; banner.style.display='none'; applyConsent(chosen);
+    };
+    modal.addEventListener('click', (e)=>{ if(e.target===modal) modal.style.display='none'; });
+  })();
+</script>
+
 <body>
   <header class="container header">
     <div class="brand">
@@ -142,8 +220,17 @@
   </main>
 
   <footer class="container footer">
-    <p>© <span id="year"></span> Honey Pot Hub · Some links are affiliate links — we may earn a commission. <span class="muted">Powered by Rakuten + partner networks.</span></p>
-  </footer>
+  <p>
+    © <span id="year"></span> Honey Pot Hub.
+    We participate in affiliate programs (including Rakuten Advertising) and may earn commissions from qualifying purchases.
+  </p>
+  <p>
+    <a href="/privacy.html">Privacy Policy</a> ·
+    <a href="/terms.html">Terms of Use</a> ·
+    <a href="/do-not-sell.html">Do Not Sell or Share My Personal Information</a>
+  </p>
+</footer>
+
 
   <!-- lightweight QR generator for the app link -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
