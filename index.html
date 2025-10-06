@@ -1,14 +1,92 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Honey Pot Hub — LIVE TEST</title>
-  <meta name="description" content="Curated affiliate deals and discount codes.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Honey Pot Hub — Community‑Verified Discounts</title>
+  <meta name="description" content="Community‑verified discount codes that actually work. Built for mobile and web. Powered by Rakuten + more." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root{
+      /* pulled from your app's src/styles/theme.ts */
+      --primary:#EF6C39;         /* brand orange */
+      --primary-dark:#D9572A;    /* darker orange */
+      --secondary:#F43F5E;       /* rose */
+      --accent:#10B981;          /* emerald for verified */
+      --grad-from:#FF7E5F;       /* gradient start */
+      --grad-to:#FEB47B;         /* gradient end */
+      --surface:#FFFFFF;         /* cards */
+      --surface-alt:#FFF7ED;     /* soft background */
+      --text:#0F172A;            /* slate-900 */
+      --text-2:#475569;          /* slate-600 */
+      --ring:#e5e7eb;            /* gray-200 */
+      --bg:#fff;
+    }
+
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+    a{color:inherit}
+    .container{max-width:1120px;margin:0 auto;padding:16px}
+
+    /* Header */
+    .header{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:10px 0}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--grad-from),var(--grad-to));display:grid;place-items:center;color:#000;font-weight:800}
+    .brand h1{font-size:20px;line-height:1.1;margin:0}
+    .tag{color:var(--text-2);font-size:14px;margin:0}
+
+    /* Hero */
+    .hero{background:linear-gradient(180deg,#fff, var(--surface-alt));border-top:1px solid var(--ring);border-bottom:1px solid var(--ring)}
+    .hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:center}
+    .kicker{display:inline-block;font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--primary)}
+    .hero h2{font-size:32px;line-height:1.1;margin:8px 0 6px}
+    .hero p{color:var(--text-2);margin:0 0 14px}
+    .store-buttons{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0 6px}
+    .store-btn{display:inline-flex;align-items:center;gap:8px;background:#111827;color:#fff;padding:10px 14px;border-radius:12px;text-decoration:none;border:1px solid #111;border-bottom-width:2px}
+    .store-btn:hover{transform:translateY(-1px)}
+    .hero-card{background:var(--surface);border:1px solid var(--ring);border-radius:16px;padding:16px}
+    .qr canvas,.qr img{border:1px solid var(--ring);border-radius:12px;background:#fff;padding:8px}
+
+    /* Controls */
+    .controls{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin:18px 0}
+    .search{flex:1;min-width:240px;padding:12px 14px;border-radius:12px;border:1px solid var(--ring);background:#fff;color:var(--text);outline:none}
+    .search:focus{border-color:var(--primary)}
+    .pillbar{display:flex;gap:8px;flex-wrap:wrap}
+    .pill{display:inline-block;padding:8px 12px;border-radius:999px;border:1px solid var(--ring);text-decoration:none}
+    .pill.active{background:#fff;border-color:var(--primary);color:var(--primary);font-weight:700}
+
+    /* Grid */
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px}
+
+    .card{background:var(--surface);border:1px solid var(--ring);border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:10px}
+    .badgebar{display:flex;gap:8px;flex-wrap:wrap}
+    .badge{font-size:12px;padding:4px 8px;border-radius:999px;border:1px solid var(--ring);color:var(--text-2)}
+    .badge.verified{border-color:var(--accent);color:var(--accent)}
+    .title{margin:0;font-size:16px}
+    .muted{color:var(--text-2)}
+    .code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;border:1px dashed var(--ring);padding:6px 8px;border-radius:8px;color:#0b3954;background:#f8fafc}
+    .actions{display:flex;gap:10px;margin-top:auto}
+    .btn{flex:1;text-align:center;text-decoration:none;padding:10px 12px;border-radius:12px;border:1px solid var(--ring);transition:transform .05s ease}
+    .btn:hover{transform:translateY(-1px)}
+    .btn.primary{background:linear-gradient(180deg,var(--grad-from),var(--grad-to));color:#111;border:0;font-weight:800}
+    .btn.copy{background:#fff}
+
+    /* How it works */
+    .how{margin:32px 0}
+    .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+    .step{background:var(--surface);border:1px solid var(--ring);border-radius:16px;padding:16px}
+    .step h4{margin:6px 0}
+
+    /* Footer */
+    .footer{padding:28px 0;color:var(--text-2)}
+
+    /* Mobile */
+    @media(max-width:900px){
+      .hero-grid{grid-template-columns:1fr}
+    }
+  </style>
 </head>
 <body>
   <header class="container header">
@@ -16,69 +94,197 @@
       <div class="logo">🍯</div>
       <div>
         <h1>Honey Pot Hub</h1>
-        <p class="muted">Find a deal. Support the creator.</p>
+        <p class="tag">Community‑verified discounts that actually work.</p>
       </div>
     </div>
-    <nav>
-      <a href="#" data-cat="all" class="pill pill-active">All</a>
-      <a href="#" data-cat="tech" class="pill">Tech</a>
-      <a href="#" data-cat="outdoors" class="pill">Outdoors</a>
-      <a href="#" data-cat="fitness" class="pill">Fitness</a>
-      <a href="#" data-cat="home" class="pill">Home</a>
+    <nav class="pillbar" id="pillbar">
+      <!-- populated from categories -->
     </nav>
   </header>
-  <section class="container hero">
-  <div class="hero-left">
-    <h2>Honey Pot Hub App</h2>
-    <p class="muted">Find working discount codes on the go. Scan in-store, copy codes, and let the community verify what works.</p>
-    <div class="store-buttons">
-      <!-- Replace these two URLs with your real store links when ready -->
-      <a class="store-btn" href="https://apps.apple.com/app/idYOUR_APPLE_ID" target="_blank" rel="noopener">Download on the App Store</a>
-      <a class="store-btn" href="https://play.google.com/store/apps/details?id=YOUR_ANDROID_PACKAGE" target="_blank" rel="noopener">Get it on Google Play</a>
-    </div>
-    <p class="muted small">Scan to download:</p>
-    <div id="app-qr" class="qr"></div>
-  </div>
-  <div class="hero-right">
-    <div class="mockup">📱</div>
-  </div>
-</section>
 
-<!-- QR generator (tiny, no build step) -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
-<script>
-  // When the QR lib loads, generate a code that points to a single “smart” link.
-  // For now, use your site — later we can swap to a Branch/Bitly smart link.
-  window.addEventListener('load', function(){
-    var qrLink = 'https://thehoneypothub.com'; // TODO: replace with your universal/app store link
-    new QRCode(document.getElementById("app-qr"), { text: qrLink, width: 140, height: 140 });
-  });
-</script>
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <span class="kicker">Mobile‑first</span>
+        <h2>Scan in‑store. Copy online. Save everywhere.</h2>
+        <p>On the app: scan codes in‑store, copy to clipboard with haptics, and vote what works. On the web: deep‑linked cash‑back through Rakuten and partner networks.</p>
+        <div class="store-buttons">
+          <a class="store-btn" href="#" id="iosLink" target="_blank" rel="noopener"> App Store</a>
+          <a class="store-btn" href="#" id="androidLink" target="_blank" rel="noopener">Google Play ▶</a>
+        </div>
+        <div class="hero-card">
+          <strong>Download via QR</strong>
+          <p class="tag">Point your camera at the code to get the app.</p>
+          <div id="app-qr" class="qr"></div>
+        </div>
+      </div>
+      <div>
+        <div class="hero-card">
+          <strong>Featured offers</strong>
+          <p class="tag">Powered by Rakuten + partners · community‑verified ✅</p>
+          <input id="search" class="search" type="search" placeholder="Search deals, brands, or codes…" aria-label="Search deals" />
+        </div>
+      </div>
+    </div>
+  </section>
 
   <main class="container">
-    <section class="controls">
-      <input id="search" type="search" placeholder="Search deals, brands, or codes…" aria-label="Search deals">
-      <div class="toggles">
-        <label class="toggle">
-          <input type="checkbox" id="show-codes" checked>
-          <span>Show codes</span>
-        </label>
-        <label class="toggle">
-          <input type="checkbox" id="only-featured">
-          <span>Featured only</span>
-        </label>
+    <section id="grid" class="grid" aria-live="polite"></section>
+
+    <section class="how">
+      <h3>How it works</h3>
+      <div class="steps">
+        <div class="step"><strong>1. Find</strong><h4>Discover real, working codes</h4><p class="muted">Our community flags working discounts and retires dead ones fast.</p></div>
+        <div class="step"><strong>2. Verify</strong><h4>Vote up what works</h4><p class="muted">Verified deals get a green check and bubble to the top.</p></div>
+        <div class="step"><strong>3. Save</strong><h4>In‑store & online</h4><p class="muted">Scan in‑store with the app or click through for cash‑back at home.</p></div>
       </div>
     </section>
-
-    <section id="grid" class="grid" aria-live="polite"></section>
-    <p id="empty" class="empty hidden">No results. Try clearing filters or searching something else.</p>
   </main>
 
   <footer class="container footer">
-    <p class="muted">© <span id="year"></span> Honey Pot Hub. Some links are affiliate links—at no cost to you, we may earn a commission.</p>
+    <p>© <span id="year"></span> Honey Pot Hub · Some links are affiliate links — we may earn a commission. <span class="muted">Powered by Rakuten + partner networks.</span></p>
   </footer>
 
-  <!-- Optional: paste your analytics snippet (e.g., Vercel Analytics) here -->
-  <script defer src="script.js"></script>
+  <!-- lightweight QR generator for the app link -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
+  <script>
+    // Theme (matches your app's theme.ts)
+    const THEME = {
+      primary: getCssVar('--primary'),
+      primaryDark: getCssVar('--primary-dark'),
+      secondary: getCssVar('--secondary'),
+      accent: getCssVar('--accent')
+    };
+    function getCssVar(name){ return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+
+    // Minimal categories aligned to your app's CATEGORIES
+    const CATEGORIES = ["All","Fashion","Tech","Food","Home","Travel","Sports","Beauty","Grocery","Subscriptions"];
+
+    // TODO: Replace ios/android URL with your real store links (or a single smart link)
+    const APP_SMART_LINK = 'https://thehoneypothub.com/app'; // can be replaced by Branch/Bitly later
+    const IOS_LINK = 'https://apps.apple.com/app/idYOUR_APPLE_ID';
+    const ANDROID_LINK = 'https://play.google.com/store/apps/details?id=YOUR_ANDROID_PACKAGE';
+
+    const els = { grid: null, search: null, pillbar: null };
+    const state = { cat: 'All', query: '' };
+
+    // Example offers — replace these URLs with your Rakuten deep links + partners
+    const OFFERS = [
+      {
+        name: "Nike via Rakuten — Up to 8% Cash Back",
+        description: "Stack cash‑back with promo codes. Community verified.",
+        url: "https://click.linksynergy.com/deeplink?id=YOUR_ID&mid=4387&murl=https%3A%2F%2Fwww.nike.com%2F",
+        code: "",
+        verified: true,
+        categories: ["Fashion","Sports"],
+        featured: true
+      },
+      {
+        name: "Best Buy via Rakuten — Deals of the Day",
+        description: "Electronics & appliances. Cash back varies.",
+        url: "https://click.linksynergy.com/deeplink?id=YOUR_ID&mid=13354&murl=https%3A%2F%2Fwww.bestbuy.com%2F",
+        code: "",
+        verified: true,
+        categories: ["Tech","Home"],
+        featured: true
+      },
+      {
+        name: "Download the Honey Pot Hub App",
+        description: "One‑tap copy codes, in‑store scanning, and community‑verified deals.",
+        url: APP_SMART_LINK,
+        code: "",
+        verified: false,
+        categories: ["All"],
+        featured: true
+      }
+    ];
+
+    function init(){
+      els.grid = document.getElementById('grid');
+      els.search = document.getElementById('search');
+      els.pillbar = document.getElementById('pillbar');
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      // App links
+      document.getElementById('iosLink').href = IOS_LINK;
+      document.getElementById('androidLink').href = ANDROID_LINK;
+
+      // QR code
+      new QRCode(document.getElementById("app-qr"), { text: APP_SMART_LINK, width: 128, height: 128 });
+
+      // Category pills
+      CATEGORIES.forEach(cat => {
+        const a = document.createElement('a');
+        a.href = '#';
+        a.textContent = cat;
+        a.className = 'pill' + (cat==='All' ? ' active' : '');
+        a.addEventListener('click', (e)=>{ e.preventDefault(); setCat(cat); });
+        els.pillbar.appendChild(a);
+      });
+
+      els.search.addEventListener('input', ()=>{ state.query = els.search.value.toLowerCase(); render(); });
+
+      render();
+    }
+
+    function setCat(cat){
+      state.cat = cat;
+      document.querySelectorAll('.pill').forEach(p=>{
+        p.classList.toggle('active', p.textContent===cat);
+      });
+      render();
+    }
+
+    function linkWithUTM(url, campaign){
+      try{
+        const u = new URL(url);
+        u.searchParams.set('utm_source','hph');
+        u.searchParams.set('utm_medium','affiliate');
+        if(campaign) u.searchParams.set('utm_campaign', campaign);
+        return u.toString();
+      }catch(_){ return url; }
+    }
+
+    function render(){
+      const q = state.query;
+      const filtered = OFFERS.filter(o => {
+        if(state.cat!=="All" && !o.categories.includes(state.cat)) return false;
+        if(q && !(o.name+o.description+(o.code||'')).toLowerCase().includes(q)) return false;
+        return true;
+      });
+      els.grid.innerHTML = '';
+      filtered.forEach(o=>{
+        const url = linkWithUTM(o.url, state.cat.toLowerCase());
+        const card = document.createElement('article');
+        card.className = 'card';
+        card.innerHTML = `
+          <div class="badgebar">
+            ${o.categories.map(c=>`<span class="badge">${c}</span>`).join('')}
+            ${o.verified ? `<span class="badge verified">✅ Verified</span>` : ''}
+          </div>
+          <h3 class="title">${o.name}</h3>
+          <p class="muted">${o.description}</p>
+          ${o.code ? `<div class="code" aria-label="Discount code">${o.code}</div>` : ''}
+          <div class="actions">
+            <a class="btn primary" href="${url}" target="_blank" rel="nofollow sponsored noopener">Get deal</a>
+            ${o.code ? `<button class="btn copy" data-code="${o.code}">Copy code</button>` : ''}
+          </div>
+        `;
+        els.grid.appendChild(card);
+      });
+    }
+
+    // Copy handler
+    document.addEventListener('click', (e)=>{
+      const btn = e.target.closest('.btn.copy');
+      if(!btn) return;
+      const code = btn.getAttribute('data-code');
+      navigator.clipboard.writeText(code).then(()=>{
+        const prev = btn.textContent; btn.textContent='Copied!'; setTimeout(()=>btn.textContent=prev, 1000);
+      });
+    });
+
+    window.addEventListener('DOMContentLoaded', init);
+  </script>
 </body>
 </html>
